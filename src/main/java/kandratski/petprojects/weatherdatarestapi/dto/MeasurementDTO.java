@@ -16,6 +16,7 @@ public class MeasurementDTO {
     @NotNull(message = "Raining should not be null")
     private Boolean raining;
 
+    @NotNull(message = "Sensor should not be null")
     private SensorDTO sensor;
 
 

@@ -3,6 +3,8 @@ package kandratski.petprojects.weatherdatarestapi.service;
 import kandratski.petprojects.weatherdatarestapi.dto.SensorDTO;
 import kandratski.petprojects.weatherdatarestapi.entity.Sensor;
 import kandratski.petprojects.weatherdatarestapi.repository.SensorRepository;
+import kandratski.petprojects.weatherdatarestapi.util.SensorNotCreatedException;
+import kandratski.petprojects.weatherdatarestapi.util.SensorNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,18 +34,31 @@ public class SensorService {
 
     public SensorDTO getOneSensorById(Integer id) {
         Optional<Sensor> sensorRepositoryById = sensorRepository.findById(id);
-        Sensor sensor = sensorRepositoryById.orElse(null);
 
-        return modelMapper.map(sensor, SensorDTO.class);
+        if (sensorRepositoryById.isEmpty()) {
+            throw new SensorNotFoundException();
+        } else {
+            Sensor sensor = sensorRepositoryById.get();
+            return modelMapper.map(sensor, SensorDTO.class);
+        }
+
     }
 
-    public Sensor getOneSensorByName(String name) {
-        return sensorRepository.findByName(name).orElse(null);
+    public Optional<Sensor> getOneSensorByName(String name) {
+        return sensorRepository.findByName(name);
     }
 
     @Transactional
     public void save(SensorDTO sensorDTO) {
-        Sensor sensor = modelMapper.map(sensorDTO, Sensor.class);
-        sensorRepository.save(sensor);
+
+        String nameSensor = sensorDTO.getName();
+
+        if (sensorRepository.findByName(nameSensor).isPresent()) {
+            throw new SensorNotCreatedException("A sensor with the same name already exists");
+        } else {
+            Sensor sensor = modelMapper.map(sensorDTO, Sensor.class);
+            sensorRepository.save(sensor);
+        }
+
     }
 }
