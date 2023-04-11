@@ -37,6 +37,10 @@ public class SensorService {
         return modelMapper.map(sensor, SensorDTO.class);
     }
 
+    public Sensor getOneSensorByName(String name) {
+        return sensorRepository.findByName(name).orElse(null);
+    }
+
     @Transactional
     public void save(SensorDTO sensorDTO) {
         Sensor sensor = modelMapper.map(sensorDTO, Sensor.class);

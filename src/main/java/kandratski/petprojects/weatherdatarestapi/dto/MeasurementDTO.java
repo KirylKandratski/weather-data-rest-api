@@ -3,7 +3,6 @@ package kandratski.petprojects.weatherdatarestapi.dto;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import kandratski.petprojects.weatherdatarestapi.entity.Sensor;
 
 public class MeasurementDTO {
 
@@ -17,7 +16,8 @@ public class MeasurementDTO {
     @NotNull(message = "Raining should not be null")
     private Boolean raining;
 
-    private SensorDTO sensorDTO;
+    private SensorDTO sensor;
+
 
     public MeasurementDTO() {
     }
@@ -46,12 +46,12 @@ public class MeasurementDTO {
         this.raining = raining;
     }
 
-    public SensorDTO getSensorDTO() {
-        return sensorDTO;
+    public SensorDTO getSensor() {
+        return sensor;
     }
 
-    public void setSensorDTO(SensorDTO sensorDTO) {
-        this.sensorDTO = sensorDTO;
+    public void setSensor(SensorDTO sensor) {
+        this.sensor = sensor;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class MeasurementDTO {
                "measurement_id=" + measurement_id +
                ", value=" + value +
                ", raining=" + raining +
-               ", sensorDTO=" + sensorDTO +
+               ", sensor=" + sensor +
                '}';
     }
 }
