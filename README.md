@@ -15,7 +15,7 @@ from various sensors. The application uses PostgreSQL as a database for persisti
 
 To install and run this project, you will need:
 
-* Java 8 or higher
+* Java 17 or higher
 * PostgreSQL
 * Maven
 

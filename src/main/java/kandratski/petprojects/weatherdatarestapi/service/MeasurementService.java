@@ -2,14 +2,16 @@ package kandratski.petprojects.weatherdatarestapi.service;
 
 import kandratski.petprojects.weatherdatarestapi.dto.MeasurementDTO;
 import kandratski.petprojects.weatherdatarestapi.entity.Measurement;
+import kandratski.petprojects.weatherdatarestapi.entity.Sensor;
 import kandratski.petprojects.weatherdatarestapi.repository.MeasurementRepository;
-import kandratski.petprojects.weatherdatarestapi.util.MeasurementNotAddedException;
+import kandratski.petprojects.weatherdatarestapi.exception.MeasurementNotAddedException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,16 +39,25 @@ public class MeasurementService {
     public void save(MeasurementDTO measurementDTO) {
 
         String nameSensor = measurementDTO.getSensor().getName();
-        if (sensorService.getOneSensorByName(nameSensor).isEmpty()) {
-            throw new MeasurementNotAddedException("The current sensor is not registered!");
-        } else {
-            Measurement measurement = modelMapper.map(measurementDTO, Measurement.class);
-            measurement.setSensor(sensorService.getOneSensorByName(nameSensor).get());
-            measurement.setRecordingTime(LocalDateTime.now());
+        Optional<Sensor> sensorByName = sensorService.getOneSensorByName(nameSensor);
 
-            measurementRepository.save(measurement);
-        }
+        sensorByName.ifPresentOrElse(
+                sensor -> {
+                    Measurement measurement = convertToMeasurement(measurementDTO);
+                    measurement.setSensor(sensor);
+                    measurement.setRecordingTime(LocalDateTime.now());
 
+                    measurementRepository.save(measurement);
+                },
+                () -> {
+                    throw new MeasurementNotAddedException("The current sensor is not registered!");
+                }
+        );
+
+    }
+
+    private Measurement convertToMeasurement(MeasurementDTO measurementDTO) {
+        return modelMapper.map(measurementDTO, Measurement.class);
     }
 
     public String rainyDaysCount() {

@@ -1,4 +1,4 @@
-package kandratski.petprojects.weatherdatarestapi.util;
+package kandratski.petprojects.weatherdatarestapi.exception;
 
 public class SensorErrorResponse {
     private String message;
