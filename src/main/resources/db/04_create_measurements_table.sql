@@ -1,12 +1,3 @@
-drop table measurements;
-drop table sensors;
-
-CREATE TABLE sensors
-(
-    sensor_id SERIAL PRIMARY KEY,
-    name      VARCHAR(255) NOT NULL
-);
-
 CREATE TABLE measurements
 (
     measurement_id SERIAL PRIMARY KEY,
