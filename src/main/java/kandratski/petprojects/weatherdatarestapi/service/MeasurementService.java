@@ -3,9 +3,10 @@ package kandratski.petprojects.weatherdatarestapi.service;
 import kandratski.petprojects.weatherdatarestapi.dto.MeasurementDTO;
 import kandratski.petprojects.weatherdatarestapi.entity.Measurement;
 import kandratski.petprojects.weatherdatarestapi.entity.Sensor;
-import kandratski.petprojects.weatherdatarestapi.repository.MeasurementRepository;
 import kandratski.petprojects.weatherdatarestapi.exception.MeasurementNotAddedException;
+import kandratski.petprojects.weatherdatarestapi.repository.MeasurementRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ public class MeasurementService {
     private final ModelMapper modelMapper;
     private final SensorService sensorService;
 
+    @Autowired
     public MeasurementService(MeasurementRepository measurementRepository, ModelMapper modelMapper, SensorService sensorService) {
         this.measurementRepository = measurementRepository;
         this.modelMapper = modelMapper;

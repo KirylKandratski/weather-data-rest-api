@@ -35,7 +35,7 @@ To install and run this project, you will need:
     spring.datasource.password=your_password
     ```
 
-3. Create the database schema by running the initialize_database.sql script in your PostgreSQL instance.
+3. Create the database schema by running the initialize scripts in your PostgreSQL instance.
 
 4. Navigate to the root directory of the project and build the application using Maven:
 

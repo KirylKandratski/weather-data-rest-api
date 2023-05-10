@@ -6,6 +6,7 @@ import kandratski.petprojects.weatherdatarestapi.repository.SensorRepository;
 import kandratski.petprojects.weatherdatarestapi.exception.SensorNotCreatedException;
 import kandratski.petprojects.weatherdatarestapi.exception.SensorNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ public class SensorService {
     private final SensorRepository sensorRepository;
     private final ModelMapper modelMapper;
 
+    @Autowired
     public SensorService(SensorRepository sensorRepository, ModelMapper modelMapper) {
         this.sensorRepository = sensorRepository;
         this.modelMapper = modelMapper;

@@ -2,9 +2,10 @@ package kandratski.petprojects.weatherdatarestapi.controller;
 
 import jakarta.validation.Valid;
 import kandratski.petprojects.weatherdatarestapi.dto.MeasurementDTO;
-import kandratski.petprojects.weatherdatarestapi.service.MeasurementService;
 import kandratski.petprojects.weatherdatarestapi.exception.MeasurementErrorResponse;
 import kandratski.petprojects.weatherdatarestapi.exception.MeasurementNotAddedException;
+import kandratski.petprojects.weatherdatarestapi.service.MeasurementService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ import java.util.List;
 public class MeasurementController {
     private final MeasurementService measurementService;
 
+    @Autowired
     public MeasurementController(MeasurementService measurementService) {
         this.measurementService = measurementService;
     }

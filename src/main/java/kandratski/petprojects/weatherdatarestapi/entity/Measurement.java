@@ -22,7 +22,7 @@ public class Measurement {
     @Id
     @Column(name = "measurement_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer measurement_id;
+    private Integer id;
 
     @Column(name = "value", nullable = false)
     @NotNull(message = "Value should not be null")
@@ -44,12 +44,12 @@ public class Measurement {
     public Measurement() {
     }
 
-    public Integer getMeasurement_id() {
-        return measurement_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMeasurement_id(Integer measurement_id) {
-        this.measurement_id = measurement_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Float getValue() {
@@ -87,7 +87,7 @@ public class Measurement {
     @Override
     public String toString() {
         return "Measurement{" +
-               "measurement_id=" + measurement_id +
+               "id=" + id +
                ", value=" + value +
                ", raining=" + raining +
                ", recordingTime=" + recordingTime +

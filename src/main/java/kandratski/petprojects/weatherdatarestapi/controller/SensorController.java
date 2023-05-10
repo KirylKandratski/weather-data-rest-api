@@ -2,10 +2,11 @@ package kandratski.petprojects.weatherdatarestapi.controller;
 
 import jakarta.validation.Valid;
 import kandratski.petprojects.weatherdatarestapi.dto.SensorDTO;
-import kandratski.petprojects.weatherdatarestapi.service.SensorService;
 import kandratski.petprojects.weatherdatarestapi.exception.SensorErrorResponse;
 import kandratski.petprojects.weatherdatarestapi.exception.SensorNotCreatedException;
 import kandratski.petprojects.weatherdatarestapi.exception.SensorNotFoundException;
+import kandratski.petprojects.weatherdatarestapi.service.SensorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ import java.util.List;
 public class SensorController {
     private final SensorService sensorService;
 
+    @Autowired
     public SensorController(SensorService sensorService) {
         this.sensorService = sensorService;
     }

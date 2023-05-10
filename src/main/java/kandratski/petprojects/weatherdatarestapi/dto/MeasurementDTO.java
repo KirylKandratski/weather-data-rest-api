@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class MeasurementDTO {
 
-    private Integer measurementId;
+    private Integer id;
 
     @NotNull(message = "Value should not be null")
     @Min(value = -100, message = "Value must be greater than -100")
@@ -23,12 +23,12 @@ public class MeasurementDTO {
     public MeasurementDTO() {
     }
 
-    public Integer getMeasurement_id() {
-        return measurementId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMeasurement_id(Integer measurement_id) {
-        this.measurementId = measurement_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Float getValue() {
@@ -58,7 +58,7 @@ public class MeasurementDTO {
     @Override
     public String toString() {
         return "MeasurementDTO{" +
-               "measurement_id=" + measurementId +
+               "id=" + id +
                ", value=" + value +
                ", raining=" + raining +
                ", sensor=" + sensor +

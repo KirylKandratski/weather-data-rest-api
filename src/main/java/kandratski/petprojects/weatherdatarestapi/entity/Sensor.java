@@ -21,7 +21,7 @@ public class Sensor {
     @Id
     @Column(name = "sensor_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer sensor_id;
+    private Integer id;
 
     @Column(name = "name", nullable = false)
     @NotNull(message = "Name should not be empty")
@@ -35,12 +35,12 @@ public class Sensor {
     public Sensor() {
     }
 
-    public Integer getSensor_id() {
-        return sensor_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setSensor_id(Integer sensor_id) {
-        this.sensor_id = sensor_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -62,7 +62,7 @@ public class Sensor {
     @Override
     public String toString() {
         return "Sensor{" +
-               "sensor_id=" + sensor_id +
+               "id=" + id +
                ", name='" + name + '\'' +
                ", measurements=" + measurements +
                '}';
