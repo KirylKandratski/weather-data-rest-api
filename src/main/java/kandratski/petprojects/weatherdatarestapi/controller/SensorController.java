@@ -1,7 +1,7 @@
 package kandratski.petprojects.weatherdatarestapi.controller;
 
 import jakarta.validation.Valid;
-import kandratski.petprojects.weatherdatarestapi.dto.SensorDTO;
+import kandratski.petprojects.weatherdatarestapi.dto.SensorDto;
 import kandratski.petprojects.weatherdatarestapi.exception.SensorErrorResponse;
 import kandratski.petprojects.weatherdatarestapi.exception.SensorNotCreatedException;
 import kandratski.petprojects.weatherdatarestapi.exception.SensorNotFoundException;
@@ -32,17 +32,17 @@ public class SensorController {
     }
 
     @GetMapping
-    public List<SensorDTO> getAllSensors() {
+    public List<SensorDto> getAllSensors() {
         return sensorService.getAllSensors();
     }
 
     @GetMapping("/{id}")
-    public SensorDTO getOneSensorById(@PathVariable("id") Integer id) {
+    public SensorDto getOneSensorById(@PathVariable("id") Integer id) {
         return sensorService.getOneSensorById(id);
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<HttpStatus> registrationSensor(@RequestBody @Valid SensorDTO sensorDTO,
+    public ResponseEntity<HttpStatus> registrationSensor(@RequestBody @Valid SensorDto sensorDTO,
                                                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             StringBuilder errorMsg = new StringBuilder();

@@ -1,11 +1,11 @@
 package kandratski.petprojects.weatherdatarestapi.service;
 
-import kandratski.petprojects.weatherdatarestapi.dto.MeasurementDTO;
+import kandratski.petprojects.weatherdatarestapi.dto.MeasurementDto;
 import kandratski.petprojects.weatherdatarestapi.entity.Measurement;
 import kandratski.petprojects.weatherdatarestapi.entity.Sensor;
 import kandratski.petprojects.weatherdatarestapi.exception.MeasurementNotAddedException;
+import kandratski.petprojects.weatherdatarestapi.mapper.MeasurementMapper;
 import kandratski.petprojects.weatherdatarestapi.repository.MeasurementRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,32 +20,32 @@ import java.util.stream.Collectors;
 public class MeasurementService {
 
     private final MeasurementRepository measurementRepository;
-    private final ModelMapper modelMapper;
     private final SensorService sensorService;
+    private final MeasurementMapper measurementMapper;
 
     @Autowired
-    public MeasurementService(MeasurementRepository measurementRepository, ModelMapper modelMapper, SensorService sensorService) {
+    public MeasurementService(MeasurementRepository measurementRepository, SensorService sensorService, MeasurementMapper measurementMapper) {
         this.measurementRepository = measurementRepository;
-        this.modelMapper = modelMapper;
         this.sensorService = sensorService;
+        this.measurementMapper = measurementMapper;
     }
 
-    public List<MeasurementDTO> getAllMeasurements() {
+    public List<MeasurementDto> getAllMeasurements() {
         return measurementRepository.findAll()
                 .stream()
-                .map(measurement -> modelMapper.map(measurement, MeasurementDTO.class))
+                .map(measurement -> measurementMapper.toDto(measurement))
                 .collect(Collectors.toList());
     }
 
     @Transactional
-    public void save(MeasurementDTO measurementDTO) {
+    public void save(MeasurementDto measurementDTO) {
 
         String nameSensor = measurementDTO.getSensor().getName();
         Optional<Sensor> sensorByName = sensorService.getOneSensorByName(nameSensor);
 
         sensorByName.ifPresentOrElse(
                 sensor -> {
-                    Measurement measurement = convertToMeasurement(measurementDTO);
+                    Measurement measurement = measurementMapper.toEntity(measurementDTO);
                     measurement.setSensor(sensor);
                     measurement.setRecordingTime(LocalDateTime.now());
 
@@ -56,10 +56,6 @@ public class MeasurementService {
                 }
         );
 
-    }
-
-    private Measurement convertToMeasurement(MeasurementDTO measurementDTO) {
-        return modelMapper.map(measurementDTO, Measurement.class);
     }
 
     public String rainyDaysCount() {

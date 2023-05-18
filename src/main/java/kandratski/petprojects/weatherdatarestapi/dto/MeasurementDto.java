@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
-public class MeasurementDTO {
+public class MeasurementDto {
 
     private Integer id;
 
@@ -17,10 +17,10 @@ public class MeasurementDTO {
     private Boolean raining;
 
     @NotNull(message = "Sensor should not be null")
-    private SensorDTO sensor;
+    private SensorDto sensor;
 
 
-    public MeasurementDTO() {
+    public MeasurementDto() {
     }
 
     public Integer getId() {
@@ -47,17 +47,17 @@ public class MeasurementDTO {
         this.raining = raining;
     }
 
-    public SensorDTO getSensor() {
+    public SensorDto getSensor() {
         return sensor;
     }
 
-    public void setSensor(SensorDTO sensor) {
+    public void setSensor(SensorDto sensor) {
         this.sensor = sensor;
     }
 
     @Override
     public String toString() {
-        return "MeasurementDTO{" +
+        return "MeasurementDto{" +
                "id=" + id +
                ", value=" + value +
                ", raining=" + raining +

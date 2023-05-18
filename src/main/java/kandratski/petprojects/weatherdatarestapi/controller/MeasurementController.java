@@ -1,7 +1,7 @@
 package kandratski.petprojects.weatherdatarestapi.controller;
 
 import jakarta.validation.Valid;
-import kandratski.petprojects.weatherdatarestapi.dto.MeasurementDTO;
+import kandratski.petprojects.weatherdatarestapi.dto.MeasurementDto;
 import kandratski.petprojects.weatherdatarestapi.exception.MeasurementErrorResponse;
 import kandratski.petprojects.weatherdatarestapi.exception.MeasurementNotAddedException;
 import kandratski.petprojects.weatherdatarestapi.service.MeasurementService;
@@ -30,12 +30,12 @@ public class MeasurementController {
     }
 
     @GetMapping()
-    public List<MeasurementDTO> getAllMeasurements() {
+    public List<MeasurementDto> getAllMeasurements() {
         return measurementService.getAllMeasurements();
     }
 
     @PostMapping("/add")
-    public ResponseEntity<HttpStatus> addMeasurement(@RequestBody @Valid MeasurementDTO measurementDTO,
+    public ResponseEntity<HttpStatus> addMeasurement(@RequestBody @Valid MeasurementDto measurementDTO,
                                                      BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
