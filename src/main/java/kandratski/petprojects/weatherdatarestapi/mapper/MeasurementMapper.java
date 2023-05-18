@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface MeasurementMapper {
+
     MeasurementDto toDto(Measurement measurement);
 
     Measurement toEntity(MeasurementDto measurementDTO);

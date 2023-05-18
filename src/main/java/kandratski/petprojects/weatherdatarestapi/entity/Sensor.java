@@ -11,11 +11,15 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "sensors")
+@NoArgsConstructor
+@Data
 public class Sensor {
 
     @Id
@@ -30,41 +34,4 @@ public class Sensor {
 
     @OneToMany(mappedBy = "sensor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Measurement> measurements;
-
-
-    public Sensor() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Measurement> getMeasurements() {
-        return measurements;
-    }
-
-    public void setMeasurements(List<Measurement> measurements) {
-        this.measurements = measurements;
-    }
-
-    @Override
-    public String toString() {
-        return "Sensor{" +
-               "id=" + id +
-               ", name='" + name + '\'' +
-               ", measurements=" + measurements +
-               '}';
-    }
 }

@@ -3,7 +3,11 @@ package kandratski.petprojects.weatherdatarestapi.dto;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 public class MeasurementDto {
 
     private Integer id;
@@ -18,50 +22,4 @@ public class MeasurementDto {
 
     @NotNull(message = "Sensor should not be null")
     private SensorDto sensor;
-
-
-    public MeasurementDto() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Float getValue() {
-        return value;
-    }
-
-    public void setValue(Float value) {
-        this.value = value;
-    }
-
-    public Boolean getRaining() {
-        return raining;
-    }
-
-    public void setRaining(Boolean raining) {
-        this.raining = raining;
-    }
-
-    public SensorDto getSensor() {
-        return sensor;
-    }
-
-    public void setSensor(SensorDto sensor) {
-        this.sensor = sensor;
-    }
-
-    @Override
-    public String toString() {
-        return "MeasurementDto{" +
-               "id=" + id +
-               ", value=" + value +
-               ", raining=" + raining +
-               ", sensor=" + sensor +
-               '}';
-    }
 }

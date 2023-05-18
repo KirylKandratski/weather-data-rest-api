@@ -12,11 +12,15 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "measurements")
+@Data
+@NoArgsConstructor
 public class Measurement {
 
     @Id
@@ -40,58 +44,4 @@ public class Measurement {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sensor_id", nullable = false)
     private Sensor sensor;
-
-    public Measurement() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Float getValue() {
-        return value;
-    }
-
-    public void setValue(Float value) {
-        this.value = value;
-    }
-
-    public Boolean getRaining() {
-        return raining;
-    }
-
-    public void setRaining(Boolean raining) {
-        this.raining = raining;
-    }
-
-    public LocalDateTime getRecordingTime() {
-        return recordingTime;
-    }
-
-    public void setRecordingTime(LocalDateTime recordingTime) {
-        this.recordingTime = recordingTime;
-    }
-
-    public Sensor getSensor() {
-        return sensor;
-    }
-
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
-    }
-
-    @Override
-    public String toString() {
-        return "Measurement{" +
-               "id=" + id +
-               ", value=" + value +
-               ", raining=" + raining +
-               ", recordingTime=" + recordingTime +
-               ", sensor=" + sensor +
-               '}';
-    }
 }
