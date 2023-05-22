@@ -62,7 +62,7 @@ public class MeasurementController {
 
     @GetMapping("/rainyDaysCount")
     public String rainyDaysCount() {
-        return measurementService.rainyDaysCount();
+        return measurementService.countRainyDays();
     }
 
     @ExceptionHandler

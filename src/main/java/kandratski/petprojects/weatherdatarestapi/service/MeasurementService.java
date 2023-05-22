@@ -58,13 +58,9 @@ public class MeasurementService {
 
     }
 
-    public String rainyDaysCount() {
+    public String countRainyDays() {
 
-
-        int rainyDays = (int) measurementRepository.findAll()
-                .stream()
-                .filter(measurement -> measurement.getRaining().equals(true))
-                .count();
+        long rainyDays = measurementRepository.countByRainingTrue();
 
         return "Number of rainy days - " + rainyDays + " days.";
     }
